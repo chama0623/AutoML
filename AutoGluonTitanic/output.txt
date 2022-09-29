@@ -1,0 +1,117 @@
+No path specified. Models will be saved in: "AutogluonModels/ag-20220929_124708/"
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20220929_124708/"
+AutoGluon Version:  0.5.2
+Python Version:     3.8.10
+Operating System:   Linux
+Train Data Rows:    891
+Train Data Columns: 11
+Label Column: Survived
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+	2 unique label values:  [0, 1]
+	If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class <--> label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+	Available Memory:                    5535.66 MB
+	Train Data (Original)  Memory Usage: 0.31 MB (0.0% of available memory)
+	Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+	Stage 1 Generators:
+		Fitting AsTypeFeatureGenerator...
+			Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+	Stage 2 Generators:
+		Fitting FillNaFeatureGenerator...
+	Stage 3 Generators:
+		Fitting IdentityFeatureGenerator...
+		Fitting CategoryFeatureGenerator...
+			Fitting CategoryMemoryMinimizeFeatureGenerator...
+		Fitting TextSpecialFeatureGenerator...
+			Fitting BinnedFeatureGenerator...
+			Fitting DropDuplicatesFeatureGenerator...
+		Fitting TextNgramFeatureGenerator...
+			Fitting CountVectorizer for text features: ['Name']
+			CountVectorizer fit with vocabulary size = 8
+	Stage 4 Generators:
+		Fitting DropUniqueFeatureGenerator...
+	Types of features in original data (raw dtype, special dtypes):
+		('float', [])        : 2 | ['Age', 'Fare']
+		('int', [])          : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+		('object', [])       : 4 | ['Sex', 'Ticket', 'Cabin', 'Embarked']
+		('object', ['text']) : 1 | ['Name']
+	Types of features in processed data (raw dtype, special dtypes):
+		('category', [])                    : 3 | ['Ticket', 'Cabin', 'Embarked']
+		('float', [])                       : 2 | ['Age', 'Fare']
+		('int', [])                         : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+		('int', ['binned', 'text_special']) : 9 | ['Name.char_count', 'Name.word_count', 'Name.capital_ratio', 'Name.lower_ratio', 'Name.special_ratio', ...]
+		('int', ['bool'])                   : 1 | ['Sex']
+		('int', ['text_ngram'])             : 9 | ['__nlp__.henry', '__nlp__.john', '__nlp__.master', '__nlp__.miss', '__nlp__.mr', ...]
+	0.3s = Fit runtime
+	11 features in original data used to generate 28 features in processed data.
+	Train Data (Processed) Memory Usage: 0.07 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.32s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+	To change this, specify the eval_metric parameter of Predictor()
+Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 712, Val Rows: 179
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif ...
+	0.6536	 = Validation score   (accuracy)
+	0.01s	 = Training   runtime
+	0.02s	 = Validation runtime
+Fitting model: KNeighborsDist ...
+	0.6536	 = Validation score   (accuracy)
+	0.01s	 = Training   runtime
+	0.02s	 = Validation runtime
+Fitting model: LightGBMXT ...
+	0.8156	 = Validation score   (accuracy)
+	1.02s	 = Training   runtime
+	0.05s	 = Validation runtime
+Fitting model: LightGBM ...
+	0.8212	 = Validation score   (accuracy)
+	0.37s	 = Training   runtime
+	0.04s	 = Validation runtime
+Fitting model: RandomForestGini ...
+	0.8156	 = Validation score   (accuracy)
+	1.0s	 = Training   runtime
+	0.09s	 = Validation runtime
+Fitting model: RandomForestEntr ...
+	0.8156	 = Validation score   (accuracy)
+	0.93s	 = Training   runtime
+	0.09s	 = Validation runtime
+Fitting model: CatBoost ...
+	0.8268	 = Validation score   (accuracy)
+	0.89s	 = Training   runtime
+	0.01s	 = Validation runtime
+Fitting model: ExtraTreesGini ...
+	0.8101	 = Validation score   (accuracy)
+	0.93s	 = Training   runtime
+	0.08s	 = Validation runtime
+Fitting model: ExtraTreesEntr ...
+	0.8101	 = Validation score   (accuracy)
+	0.98s	 = Training   runtime
+	0.08s	 = Validation runtime
+Fitting model: NeuralNetFastAI ...
+No improvement since epoch 9: early stopping
+	0.8324	 = Validation score   (accuracy)
+	2.76s	 = Training   runtime
+	0.02s	 = Validation runtime
+Fitting model: XGBoost ...
+/usr/local/lib/python3.8/dist-packages/xgboost/compat.py:31: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+	0.8101	 = Validation score   (accuracy)
+	0.43s	 = Training   runtime
+	0.03s	 = Validation runtime
+Fitting model: NeuralNetTorch ...
+	0.8436	 = Validation score   (accuracy)
+	2.77s	 = Training   runtime
+	0.02s	 = Validation runtime
+Fitting model: LightGBMLarge ...
+	0.8324	 = Validation score   (accuracy)
+	0.9s	 = Training   runtime
+	0.04s	 = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+	0.8492	 = Validation score   (accuracy)
+	0.26s	 = Training   runtime
+	0.0s	 = Validation runtime
+AutoGluon training complete, total runtime = 14.39s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20220929_124708/")
